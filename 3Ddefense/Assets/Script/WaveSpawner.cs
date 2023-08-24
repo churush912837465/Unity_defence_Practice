@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] float countdown = 2f;
     [SerializeField] float waveIdex = 0;
 
-    public Text waveCountdownText;
+    public TextMeshProUGUI waveCountdownText;
 
     void Start()
     {
@@ -28,7 +29,8 @@ public class WaveSpawner : MonoBehaviour
             countdown = timeBetweenWaves;
         }
         countdown -= Time.deltaTime; //시간이 계속 줄어들게
-        waveCountdownText.text = Mathf.Round(countdown).ToString();
+        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
+        waveCountdownText.text = string.Format("{0:00:00}" , countdown);
     }
 
     IEnumerator SpawnWave() 
