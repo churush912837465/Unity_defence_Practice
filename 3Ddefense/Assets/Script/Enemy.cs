@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform target;
     [SerializeField] int wavepointIndex = 0;
 
+    public int health=100;
+    public int value = 50;
+
     void Start()
     {
         target = Waypoints.points[0];
@@ -32,13 +35,38 @@ public class Enemy : MonoBehaviour
     {
         if (wavepointIndex >= Waypoints.points.Length - 1)  //index가 배열의 인덱스보다 커지면
         {
-            Destroy(gameObject);
+            EndPath();
             return;
         }
 
         wavepointIndex++;
         target = Waypoints.points[wavepointIndex];
 
+    }
+    
+    //경로가 끝나면
+    void EndPath() 
+    {
+        PlayerStats.Lives--; // PlayerStats스크립트의 static형 Lives변수
+        Destroy(gameObject);
+    }
+
+
+    //데미지 함수
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        PlayerStats.Money += value; //PlayerStats 스크립트의 static형 Monvey에 돈 더하기
+        Destroy(gameObject);
     }
 
 }

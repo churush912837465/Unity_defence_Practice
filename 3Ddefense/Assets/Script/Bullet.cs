@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public GameObject effect;
 
     public float explosionRadius = 0f; // 폭발범위
+    public int damage = 15; //총알 데미지
 
     public void Seek(Transform _target) // turret이 찾은 target의 정보를 가져옴
     {
@@ -82,7 +83,12 @@ public class Bullet : MonoBehaviour
     }
     void Damage(Transform enemy)
     {
-        Destroy(enemy.gameObject);
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if (e != null) 
+        {
+            e.TakeDamage(damage);
+        }
     }
 
     void OnDrawGizmosSelected()

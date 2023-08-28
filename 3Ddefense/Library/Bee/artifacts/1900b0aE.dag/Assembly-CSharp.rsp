@@ -353,6 +353,8 @@
 "Assets/Script/CameraController.cs"
 "Assets/Script/Currency.cs"
 "Assets/Script/Enemy.cs"
+"Assets/Script/GameMaster.cs"
+"Assets/Script/LivesUI.cs"
 "Assets/Script/MoneyUI.cs"
 "Assets/Script/Node.cs"
 "Assets/Script/PlayerStats.cs"
