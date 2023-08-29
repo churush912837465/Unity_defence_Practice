@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Turret : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class Turret : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
 
+
+    [Header("Layser")]
+    public bool useLaser = false;
+    public LineRenderer lineRenderer;
+    public ParticleSystem impactImpact;
+
     void Start()
     {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
@@ -29,19 +36,59 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        if(target == null) 
+        if (target == null)
         {
+            //라인렌더러
+            if (useLaser) 
+            {
+                if (lineRenderer.enabled) 
+                {
+                    lineRenderer.enabled = false;
+                    impactImpact.Stop(); // 레이져 이펙트
+                }
+            }
+
             return;
         }
 
         tarretRotate(); // 터렛 회전
 
-        if (fireCountdown <= 0f) 
+        if (useLaser)
         {
-            Shoot();
-            fireCountdown = 1f / fireRate; // 1초에 N번 발사
+            Laser();
         }
-        fireCountdown -= Time.deltaTime;
+        else 
+        {
+            if (fireCountdown <= 0f)
+            {
+                Shoot();
+                fireCountdown = 1f / fireRate; // 1초에 N번 발사
+            }
+            fireCountdown -= Time.deltaTime;
+        }
+
+
+    }
+
+    // 레이져
+    // 라인렌더러 사용
+    void Laser() 
+    {
+        if (!lineRenderer.enabled) 
+        {
+            lineRenderer.enabled = true;
+            impactImpact.Play(); //레이져 이펙트 
+        
+        }
+
+        lineRenderer.SetPosition(0 , firePoint.position);
+        lineRenderer.SetPosition(1 , target.position);
+
+        // 레이져가 나가서 enemy에 닿이는 방향으로 impact가 생성되야함
+        Vector3 dir = firePoint.position - target.position; //layser을 향해 다시 가는 dir
+        impactImpact.transform.position = target.position + dir.normalized * 0.5f;
+        impactImpact.transform.rotation = Quaternion.LookRotation(dir); //impact에서 회전은 터렛을 바라봄
+
     }
 
     //사격
