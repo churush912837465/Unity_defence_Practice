@@ -404,7 +404,6 @@ Transform:
   m_PrefabInstance: {fileID: 28094652}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD:Assets/Scenes/SampleScene.unity
-<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
 <<<<<<< HEAD
 --- !u!224 &29396676 stripped
 RectTransform:
@@ -414,8 +413,6 @@ RectTransform:
 =======
 >>>>>>> parent of 6d67d25 (defence_Practice)
 =======
-=======
->>>>>>> parent of 1a70a72 (8.29):3Ddefense/Assets/Scenes/SampleScene.unity
 --- !u!1001 &40045102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -485,9 +482,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab4a941639d4c241aaf47a18141b78e, type: 3}
-<<<<<<< HEAD:Assets/Scenes/SampleScene.unity
->>>>>>> parent of 1a70a72 (8.29):3Ddefense/Assets/Scenes/SampleScene.unity
-=======
 >>>>>>> parent of 1a70a72 (8.29):3Ddefense/Assets/Scenes/SampleScene.unity
 --- !u!1001 &51426230
 PrefabInstance:
