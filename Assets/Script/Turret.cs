@@ -25,8 +25,11 @@ public class Turret : MonoBehaviour
 
     [Header("Layser")]
     public bool useLaser = false;
+
+    public int damageOverTime = 30;
     public LineRenderer lineRenderer;
-    public ParticleSystem impactImpact;
+    public ParticleSystem impactImpact; // 파티클 Play와 Stop실행안됨 - 고쳐야함
+    public float slowPercent = 0.5f;
 
     void Start()
     {
@@ -55,7 +58,11 @@ public class Turret : MonoBehaviour
 
         if (useLaser)
         {
-            Laser();
+            if (targetEnemy != null) 
+            {
+                Debug.Log("Laser함수 실행!");
+                Laser();
+            }
         }
         else 
         {
@@ -74,6 +81,10 @@ public class Turret : MonoBehaviour
     // 라인렌더러 사용
     void Laser() 
     {
+        //데미지 주기
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowPercent);
+
         if (!lineRenderer.enabled) 
         {
             lineRenderer.enabled = true;
