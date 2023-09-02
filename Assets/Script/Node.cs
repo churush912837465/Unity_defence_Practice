@@ -31,15 +31,15 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
+        if (turret != null) 
+        {
+            Debug.Log("노드가 비어있지 않습니다");
+            buildManager.SelectNode(this); //노드가 있으면 , buildManager로 node옮김
+            return;
+        }
 
         if (!buildManager.CanBuild)
             return;
-
-        if (turret != null) 
-        {
-            Debug.Log("Can not build here");
-            return;
-        }
 
         buildManager.builTrretOn(this); //Node 전달
         //터렛이 비어있을때만 설치가능 -> BuildManeger로 옮김

@@ -9,6 +9,9 @@ public class GameMaster : MonoBehaviour
 
     private bool gameEnded = false;
 
+    [Header("UI")]
+    public GameObject gameoverUi;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,8 +31,9 @@ public class GameMaster : MonoBehaviour
     void EndGame() 
     {
         gameEnded = true;
-        Debug.Log("게임오버");
-
+        
+        //게임오버 Ui
+        gameoverUi.SetActive(true);
     }
 
 

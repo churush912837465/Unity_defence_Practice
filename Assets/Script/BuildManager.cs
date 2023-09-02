@@ -9,6 +9,8 @@ public class BuildManager : MonoBehaviour
     public GameObject buildEffect;
 
     [SerializeField] TurretBlueprint turretToBuild; // 처음엔 null 
+    [SerializeField] Node selectNode; //select한 노드 - 지금은 작동안함 ㅠㅠ
+    public NodeUi nodeUI;
 
     //BuildManager을 싱글톤으로
     private void Awake()
@@ -21,9 +23,19 @@ public class BuildManager : MonoBehaviour
         instance = this;
     }
 
+    //지을 터렛
     public void SelecetTurretToBuid(TurretBlueprint turret) 
     {
         turretToBuild = turret;
+        selectNode = null; //왜 null해줘야 하는거징
+    }
+    //노드 가져오기
+    public void SelectNode(Node node)
+    {
+        selectNode = node;
+        turretToBuild = null;
+
+        nodeUI.SetTarget(node);
     }
 
 
